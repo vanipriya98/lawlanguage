@@ -1,0 +1,71 @@
+<div class="video-player-wrapper">
+    <h2>Angular Video Player with Controls Example</h2>
+    <vg-player>
+      <vg-overlay-play></vg-overlay-play>
+      <vg-buffering></vg-buffering>
+      <vg-scrub-bar>
+        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+      </vg-scrub-bar>
+      <vg-controls>
+        <vg-play-pause></vg-play-pause>
+        <!-- <vg-skip-button backward="5" title="Rewind 5 seconds"></vg-skip-button>
+        <vg-skip-button forward="5" title="Forward 5 seconds"></vg-skip-button> -->
+    
+        <button mat-icon-button (click)="rewind()">
+            <mat-icon>replay_5</mat-icon>
+          </button>
+          <div class="current-speed"  (click)="toggleDropdown()">{{ selectedSpeed }}x</div>
+
+          <!-- Playback speed dropdown -->
+          <div class="playback-speed-dropdown" *ngIf="showDropdown">
+    
+            <select id="playbackSpeed" [(ngModel)]="selectedSpeed" (change)="changeSpeed()">
+              <option *ngFor="let speed of playbackSpeeds" [value]="speed">{{ speed }}x</option>
+            </select>
+          </div>
+          <!-- <vg-playback-button (click)="toggleDropdown(); $event.stopPropagation()"></vg-playback-button>
+          <div class="playback-speed-dropdown" *ngIf="showDropdown">
+            <select id="playbackSpeed" [(ngModel)]="selectedSpeed" (change)="changeSpeed()">
+              <option *ngFor="let speed of playbackSpeeds" [value]="speed">{{ speed }}x</option>
+            </select>
+          </div> -->
+          <!-- <select [(ngModel)]="playbackRate" (change)="updatePlaybackRate()">
+            <option value="0.5">0.5x</option>
+            <option value="1.0">1x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2.0">2x</option>
+            <option value="2.5">2.5x</option>
+          </select> -->
+          <!-- Forward Button with Material Icon -->
+          <button mat-icon-button (click)="forward()">
+            <mat-icon>forward_5</mat-icon>
+          </button>
+         
+    
+        <!-- <vg-playback-button></vg-playback-button> -->
+        
+        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+       
+        
+        
+        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+        <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+       
+        <vg-mute></vg-mute>
+        <vg-volume></vg-volume>
+        <vg-track-selector></vg-track-selector>
+        <vg-fullscreen></vg-fullscreen>
+        
+        <!-- <vg-halfscreen></vg-halfscreen> -->
+      </vg-controls>
+      <video  class="videopalyer" [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>
+        
+        <source src={{url}} type="video/webm">
+        <track kind="subtitles" label="English"
+          srclang="en" default>
+        
+      </video>
+      
+    </vg-player>
+  </div>
